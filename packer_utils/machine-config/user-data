@@ -1,0 +1,45 @@
+#cloud-config
+autoinstall:
+  version: 1
+  locale: en_US
+  keyboard:
+    layout: es
+  network:
+    version: 2
+    ethernets:
+      ens18:
+        dhcp4: true
+  early-commands:
+    - apt-get update
+    - apt-get install -y openssh-server
+    - systemctl start ssh
+  ssh:
+    install-server: true
+    allow-pw: true
+    disable_root: true
+    ssh_quiet_keygen: true
+    allow_public_ssh_keys: true
+    permit_root_login: false
+  debug: true
+  packages:
+    - qemu-guest-agent
+    - sudo
+    - openssh-server
+  late-commands:
+    - echo 'PasswordAuthentication yes' >> /target/etc/ssh/sshd_config
+    - systemctl enable ssh --now
+  storage:
+    layout:
+      name: direct
+    swap:
+      size: 0
+  user-data:
+    package_upgrade: false
+    timezone: Europe/Madrid
+    users:
+      - name: telecomunicaciones
+        groups: [adm, sudo]
+        lock-passwd: false
+        sudo: ALL=(ALL) NOPASSWD:ALL 
+        shell: /bin/bash
+        passwd: "$6$PF1gnh03xZk/GtG4$EHlYGjgRFb65MAmZbjAzRk/lfXVMQ5pGtDa4fhhzVEQNSqWg/2WiobpatAtm6KAyF4szLzummMmcR4DrHzu2T" 
