@@ -98,7 +98,6 @@ source "proxmox" "ubuntu-server-focal"  {
 
 # this is where the machine image is build
 build {
-
     name    = "ubuntu2204server"  # name of the template that will be created in Proxmox
     sources = ["source.proxmox.ubuntu-server-focal"] 
 
