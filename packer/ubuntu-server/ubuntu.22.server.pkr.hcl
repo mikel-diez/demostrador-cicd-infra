@@ -38,15 +38,18 @@ source "proxmox-iso" "ubuntu-server-focal"  {
     }
 
     # system settings
+    iso_storage_pool = "local"
+    unmount          = true
     qemu_agent = true  # lets prmoxmox agent to retrieve machine data to show in IU, as 'vmware tools' in Vmware
     scsi_controller = "virtio-scsi-pci" # default controller in most cases
 
     # hard disk os VM
     disks {
-        disk_size    = "50G"  
-        format       = "raw"
-        storage_pool = "local-lvm"  
-        type         = "virtio" 
+        disk_size = "20G"
+        format = "qcow2"
+        storage_pool = "local-lvm"
+        storage_pool_type = "lvm"
+        type = "virtio"
     }
 
     # cpu
@@ -65,7 +68,7 @@ source "proxmox-iso" "ubuntu-server-focal"  {
 
     # clout-init settings, here to store the cloud-init files
     cloud_init              = true
-    cloud_init_storage_pool = "local"
+    cloud_init_storage_pool = "local-lvm"
 
 
     boot_command = [
@@ -88,7 +91,7 @@ source "proxmox-iso" "ubuntu-server-focal"  {
     # ssh settings 
     ssh_username = "telecomunicaciones"
     ssh_password = "telecomunicaciones" 
-    # ssh_private_key_file = "~/.ssh/id_rsa"   # if you prefer the packer construction with ssh instead of user+pass
+
     ssh_timeout  = "60m" # in my case takes quite loong time, but dependes on your network and hypervisor strength
 
     # packer binding, in case you want to expose packer in all netwokr interfaces and in an exact ports, if not just comment this 
@@ -141,15 +144,4 @@ build {
             "sudo sync"
         ]
     }
-
-    # to set time 
-    # provisioner "shell" {
-    #     inline = [
-    #         "sudo apt-get install -y ntp",
-    #         "sudo systemctl enable ntp",
-    #         "sudo systemctl start ntp"
-    #     ]
-    # }
-
-
 }
