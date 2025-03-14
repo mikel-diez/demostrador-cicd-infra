@@ -75,7 +75,6 @@ source "proxmox-iso" "ubuntu-server-focal"  {
         "autoinstall ds=nocloud-net;s=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ ",
         "--- <enter>"
     ]
-    boot = "c"
     boot_wait = "10s"
 
 
