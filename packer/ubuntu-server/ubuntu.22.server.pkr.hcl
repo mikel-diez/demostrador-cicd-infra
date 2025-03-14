@@ -39,7 +39,7 @@ source "proxmox-iso" "ubuntu-server-focal"  {
 
     # system settings
     iso_storage_pool = "local"
-    unmount          = true
+    unmount_iso = true
     qemu_agent = true  # lets prmoxmox agent to retrieve machine data to show in IU, as 'vmware tools' in Vmware
     scsi_controller = "virtio-scsi-pci" # default controller in most cases
 
