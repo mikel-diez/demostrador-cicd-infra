@@ -1,6 +1,10 @@
 #cloud-config
 autoinstall:
   version: 1
+  identity:
+    hostname: ubuntu-server
+    username: telecomunicaciones
+    password: "$6$PF1gnh03xZk/GtG4$EHlYGjgRFb65MAmZbjAzRk/lfXVMQ5pGtDa4fhhzVEQNSqWg/2WiobpatAtm6KAyF4szLzummMmcR4DrHzu2T"
   locale: en_US
   keyboard:
     layout: es
@@ -34,12 +38,10 @@ autoinstall:
     swap:
       size: 0
   user-data:
-    package_upgrade: false
-    timezone: Europe/Madrid
     users:
       - name: telecomunicaciones
         groups: [adm, sudo]
         lock-passwd: false
-        sudo: ALL=(ALL) NOPASSWD:ALL 
+        sudo: ALL=(ALL) NOPASSWD:ALL
         shell: /bin/bash
-        hashed_passwd: "$6$PF1gnh03xZk/GtG4$EHlYGjgRFb65MAmZbjAzRk/lfXVMQ5pGtDa4fhhzVEQNSqWg/2WiobpatAtm6KAyF4szLzummMmcR4DrHzu2T" 
+        passwd: "$6$PF1gnh03xZk/GtG4$EHlYGjgRFb65MAmZbjAzRk/lfXVMQ5pGtDa4fhhzVEQNSqWg/2WiobpatAtm6KAyF4szLzummMmcR4DrHzu2T" 
