@@ -17,7 +17,7 @@ variable "proxmox_api_secret" {
 
 
 
-source "proxmox-iso" "ubuntu2404server" {
+source "proxmox" "ubuntu-server-focal"  {
     proxmox_url = var.proxmox_url
     username    = var.proxmox_api_token_id
     token       = var.proxmox_api_secret
@@ -25,15 +25,15 @@ source "proxmox-iso" "ubuntu2404server" {
 
     node                 = "pve-node-1"
     vm_id                = 700
-    vm_name              = "ubuntu2404server"
-    template_description = "Ubuntu server 24.04 template"
+    vm_name              = "ubuntu2204server"
+    template_description = "Ubuntu server 22.04 template"
 
 
     # download the image from https://releases.ubuntu.com/jammy/ via UI 
     # then move it to a storage in Proxmox
     boot_iso {
         type             = "ide"
-        iso_file         = "local:iso/ubuntu-24.04.2-live-server-amd64.iso"
+        iso_file         = "local:iso/ubuntu-22.04.5-live-server-amd64.iso"
         unmount          = true
     }
 
@@ -67,40 +67,21 @@ source "proxmox-iso" "ubuntu2404server" {
     cloud_init              = true
     cloud_init_storage_pool = "local"
 
-    # !!!!!!!!!! the machine you run this needs direct connection with the machine template that will be created during provisioning !!!!!!!!!!
+
     boot_command = [
-        "<esc><wait>",
-        "<enter><wait>",
-        "/casper/vmlinuz<wait>",
-        " root=LABEL=Ubuntu-Server<wait>",
-        " initrd=/casper/initrd<wait>",
-        " quiet<wait>",
-        " autoinstall<wait>",
-        " ds=nocloud-net\\;s=http://{{ .HTTPIP }}:{{ .HTTPPort }}/<wait>",
-        " ip=dhcp<wait>",
-        " debug=1<wait>",
-        " ---<wait>",
-        "<enter><wait>"
+        "<esc><wait><esc><wait>",
+        "<f6><wait><esc><wait>",
+        "<bs><bs><bs><bs><bs>",
+        "autoinstall ds=nocloud-net;s=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ ",
+        "--- <enter>"
     ]
+    boot = "c"
+    boot_wait = "5s"
 
-    /* boot_command = [
-        "<esc><wait>",
-        "<enter><wait>",
-        "/casper/vmlinuz<wait>",
-        " root=LABEL=Ubuntu-Server<wait>",
-        " initrd=/casper/initrd<wait>",
-        " quiet<wait>",
-        " autoinstall<wait>",
-        " ds=nocloud-net\\;s=http://{{ .HTTPIP }}:{{ .HTTPPort }}/<wait>",
-        " ---<wait>",
-        "<enter><wait>"
-    ] */
 
-    boot      = "c" # console mode for booting
-    boot_wait = "30s" # wait time
 
     # directory where machine configuration exists
-    http_directory = "machine-config"
+    http_directory = "cloud-init"
 
     # ssh settings 
     ssh_username = "telecomunicaciones"
@@ -118,8 +99,8 @@ source "proxmox-iso" "ubuntu2404server" {
 # this is where the machine image is build
 build {
 
-    name    = "ubuntu2404server"  # name of the template that will be created in Proxmox
-    sources = ["source.proxmox-iso.ubuntu2404server"] 
+    name    = "ubuntu2204server"  # name of the template that will be created in Proxmox
+    sources = ["source.proxmox-iso.ubuntu2204server"] 
 
     # first shell script to be executed on the amchine
     provisioner "shell" {
