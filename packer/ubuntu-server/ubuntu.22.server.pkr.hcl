@@ -76,7 +76,7 @@ source "proxmox-iso" "ubuntu-server-focal"  {
         "--- <enter>"
     ]
     boot = "c"
-    boot_wait = "5s"
+    boot_wait = "10s"
 
 
 
