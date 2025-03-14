@@ -100,7 +100,7 @@ source "proxmox" "ubuntu-server-focal"  {
 build {
 
     name    = "ubuntu2204server"  # name of the template that will be created in Proxmox
-    sources = ["source.proxmox-iso.ubuntu2204server"] 
+    sources = ["source.proxmox.ubuntu2204server"] 
 
     # first shell script to be executed on the amchine
     provisioner "shell" {
