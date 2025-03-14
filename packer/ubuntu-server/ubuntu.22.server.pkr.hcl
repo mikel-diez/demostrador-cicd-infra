@@ -89,8 +89,8 @@ source "proxmox-iso" "ubuntu-server-focal"  {
     http_directory = "cloud-init"
 
     # ssh settings 
-    ssh_private_key_file = "/root/.ssh/id_rsa"
-    ssh_username = "telecomunicaciones"
+    ssh_private_key_file = "~/.ssh/id_rsa"
+    ssh_username = "provisioner"
 
     ssh_timeout  = "60m" # in my case takes quite loong time, but dependes on your network and hypervisor strength
 
