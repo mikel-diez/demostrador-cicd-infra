@@ -17,7 +17,7 @@ variable "proxmox_api_secret" {
 
 
 
-source "proxmox" "ubuntu-server-focal"  {
+source "proxmox-iso" "ubuntu-server-focal"  {
     proxmox_url = var.proxmox_url
     username    = var.proxmox_api_token_id
     token       = var.proxmox_api_secret
@@ -99,7 +99,7 @@ source "proxmox" "ubuntu-server-focal"  {
 # this is where the machine image is build
 build {
     name    = "ubuntu2204server"  # name of the template that will be created in Proxmox
-    sources = ["source.proxmox.ubuntu-server-focal"] 
+    sources = ["source.proxmox-iso.ubuntu-server-focal"] 
 
     # first shell script to be executed on the amchine
     provisioner "shell" {
