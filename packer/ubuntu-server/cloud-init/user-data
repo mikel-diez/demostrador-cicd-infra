@@ -42,4 +42,4 @@ autoinstall:
         lock-passwd: false
         sudo: ALL=(ALL) NOPASSWD:ALL 
         shell: /bin/bash
-        passwd: "$6$PF1gnh03xZk/GtG4$EHlYGjgRFb65MAmZbjAzRk/lfXVMQ5pGtDa4fhhzVEQNSqWg/2WiobpatAtm6KAyF4szLzummMmcR4DrHzu2T" 
+        hashed_passwd: "$6$PF1gnh03xZk/GtG4$EHlYGjgRFb65MAmZbjAzRk/lfXVMQ5pGtDa4fhhzVEQNSqWg/2WiobpatAtm6KAyF4szLzummMmcR4DrHzu2T" 
