@@ -3,6 +3,8 @@
 # Install git
 sudo apt-get update
 sudo apt-get install -y git
+sudo apt-get install -y gnupg2
+sudo apt-get install -y software-properties-common
 
 # Install Hashicorp Packer
 curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
