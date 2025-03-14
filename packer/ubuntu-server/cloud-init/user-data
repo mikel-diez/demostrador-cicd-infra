@@ -4,7 +4,7 @@ autoinstall:
   identity:
     hostname: ubuntu-server
     username: telecomunicaciones
-    password: "$6$PF1gnh03xZk/GtG4$EHlYGjgRFb65MAmZbjAzRk/lfXVMQ5pGtDa4fhhzVEQNSqWg/2WiobpatAtm6KAyF4szLzummMmcR4DrHzu2T"
+    password: "$6$y36TX6TDQ0DXJxD0$TaWLlKEhxOQ6kwzz.WZDSRSaragmi2Q3nVPvmgpiZ44Le7HU9H16XOdzXQVzMp8M3V6bFBERw8okOOK6dKJvX0"
   locale: en_US
   keyboard:
     layout: es
@@ -44,4 +44,6 @@ autoinstall:
         lock-passwd: false
         sudo: ALL=(ALL) NOPASSWD:ALL
         shell: /bin/bash
-        passwd: "$6$PF1gnh03xZk/GtG4$EHlYGjgRFb65MAmZbjAzRk/lfXVMQ5pGtDa4fhhzVEQNSqWg/2WiobpatAtm6KAyF4szLzummMmcR4DrHzu2T" 
+        passwd: "$6$y36TX6TDQ0DXJxD0$TaWLlKEhxOQ6kwzz.WZDSRSaragmi2Q3nVPvmgpiZ44Le7HU9H16XOdzXQVzMp8M3V6bFBERw8okOOK6dKJvX0"
+        ssh_authorized_keys:
+          - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCnQozsRA4zVQZG/Z9Dr0UP0VjL1H4L4G2Xx3nFHM+/utthyV0UNoGMRjbtu5CC8a/Ahl1P8/iSQeJZ1833jldoe2kjopQP8dnQ8XZTD4dJLxTtBPIx/VdZExwghODx/WNtX589WsCo8YuA1HX7nKhu3L6t7AEr7nXZ4emSGAa09JWhDhD+Qzwq6i9CqeMyS1aCNxYIsNrcN41nsP7Tm+rLfIokhq1BcQhWQcC0RxyWTHU2QP+dhx1//AHRo5nGUqjdfR3Zfopl4MvEHerwPZeltlANW4gf9DC4i51fZlXG+kTK3R8mY0DgWlpQb8AwvrvauUZMTdIsRZKmHvop2JasjHmMmaBJmVv9gvQ3Ha+x1VLVH+ATowE7s5ljIRCAypkWvJsXnkeunuktgA6iC/TlLr5MTSPQJNmT5L4skNivgsFAZMMYHlm3bMGwRAExXGxJhdW6M/64fO0qj+B1UmSlgPiJgMkEnfGhtNY7VO+bHoL39U9zpU8aSi8dFWr/VRXlC3bQ1FWLVOYpEpKBIFxDZdR+yqqC7tqZgEbf3nPtRLUC7rxNEyl6zNBW/gVKOzOzfUAGBHAX0/cqz5xElXuLETH7BPdnbJTCH/4fzQxDxLfzm0rORTh1u0PtmE7zcn/Go3MZxbL/nIaEz6onnO83jVzbEvCNFDaIYevZiisG0Q== arraiz@flea
