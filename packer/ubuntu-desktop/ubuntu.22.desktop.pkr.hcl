@@ -74,8 +74,8 @@ source "proxmox-iso" "ubuntu-desktop-focal"  {
     boot_command = [
         "<esc><wait>",
         "c<wait>",
-        "linux /casper/vmlinuz --- autoinstall ds=nocloud-net\\;s=http://{{.HTTPIP}}:{{.HTTPPort}}/ quiet splash<enter><wait>",
-        "initrd /casper/initrd.lz<enter><wait>",
+        "linux /boot/vmlinuz --- autoinstall ds=nocloud-net\\;s=http://{{.HTTPIP}}:{{.HTTPPort}}/ quiet splash<enter><wait>",
+        "initrd /boot/initrd<enter><wait>",
         "boot<enter>"
     ]
 
