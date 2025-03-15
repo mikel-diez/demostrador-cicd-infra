@@ -1,0 +1,55 @@
+#cloud-config
+autoinstall:
+  version: 1
+  identity:
+    hostname: ubuntu-server
+    username: telecomunicaciones
+    password: "$6$y36TX6TDQ0DXJxD0$TaWLlKEhxOQ6kwzz.WZDSRSaragmi2Q3nVPvmgpiZ44Le7HU9H16XOdzXQVzMp8M3V6bFBERw8okOOK6dKJvX0"
+  locale: en_US
+  keyboard:
+    layout: es
+  network:
+    version: 2
+    ethernets:
+      ens18:
+        dhcp4: true
+  early-commands:
+    - apt-get update
+    - apt-get install -y openssh-server
+    - systemctl start ssh
+  ssh:
+    install-server: true
+    allow-pw: true
+    disable_root: true
+    ssh_quiet_keygen: true
+    allow_public_ssh_keys: true
+    permit_root_login: false
+  debug: true
+  packages:
+    - qemu-guest-agent
+    - sudo
+    - openssh-server
+  late-commands:
+    - echo 'PasswordAuthentication yes' >> /target/etc/ssh/sshd_config
+    - systemctl enable ssh --now
+  storage:
+    layout:
+      name: direct
+    swap:
+      size: 0
+  user-data:
+    users:
+      - name: telecomunicaciones
+        groups: [adm, sudo]
+        lock-passwd: false
+        sudo: ALL=(ALL) NOPASSWD:ALL
+        shell: /bin/bash
+        passwd: "$6$y36TX6TDQ0DXJxD0$TaWLlKEhxOQ6kwzz.WZDSRSaragmi2Q3nVPvmgpiZ44Le7HU9H16XOdzXQVzMp8M3V6bFBERw8okOOK6dKJvX0"
+      - name: provisioner
+        groups: [adm, sudo]
+        lock-passwd: false
+        sudo: ALL=(ALL) NOPASSWD:ALL
+        shell: /bin/bash
+        passwd: "$6$agOiEHkHuJk2WI7U$m2oRu5JRqEccTYB7q7zcUown..usWzGjnOVxZcqPiI/DbUjAz4WA5RhEq7QPn/h7P3rd8ccE27X6o2l6Faq7M1"
+        ssh_authorized_keys:
+          - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC2+vAOEG4hbANHx2fGmcq7TDsCHuOG/AT4PFyB0NOaFv5IW0pJZnW6+ipmUw+utme+jVhstHnB9z48my0ydQ2t9sg65hDk63ZDaLI+sV87y4hYjpn8kfNDi4iypLRqAM/pbuj4p6tyligwxecibtWeNt58ZVpnokM7OVB4E+1OPiXARuNE7WkR4OAdwltJzrxjrqT8lBalea79X2JWstFTXVEaKUooJqQfYeXsCqUVaBwaWUhTJcgOUBsdaIzziU6DkbnGHbxJNiTlLMNBuKAksdA765decIP8nfgQmDbZnkRIWlkar/czqp+fxxkVw4myjiMlI8pA88W4pU1PN3XwkCHuGUQzS/P5tXQs4UIh2hBYinmCnr8M+DO4Yr69lAZutZgw53IeVrwDJDJTOLYt8MaIOdO4aD8t0YSz3l/VH1jGKEP67BYkuQocnZbyBYLlbkF18039ALlXR0cQGnG6ZL0hhxkAGsPdS1Z2BvmVjMLjXtsk9mc/P2oX2kBngccxlHLiyZc5o8Lp71VRkvDDtwkdVbEh9CCwrtSQF+j+h0DXdFFEpj9iD9o3aGwLf5Esg1UwNThn1mBF4a0Fb/tKBgKhdahz+d7AX/J61+dklA3JgSQLsz6MMFZtwYFOjUbBeQSut/Ttw9opw90R1TGMedTsJ2eIXHut3KB9Ny9Mew== provisioner@container
