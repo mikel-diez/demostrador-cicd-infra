@@ -17,7 +17,7 @@ variable "proxmox_api_secret" {
 
 
 
-source "proxmox-iso" "ubuntu-server-focal"  {
+source "proxmox-iso" "ubuntu-desktop-focal"  {
     proxmox_url = var.proxmox_url
     username    = var.proxmox_api_token_id
     token       = var.proxmox_api_secret
@@ -33,7 +33,7 @@ source "proxmox-iso" "ubuntu-server-focal"  {
     # then move it to a storage in Proxmox
     boot_iso {
         type             = "ide"
-        iso_file         = "local:iso/ubuntu-22.04.5-live-server-amd64.iso"
+        iso_file         = "local:iso/ubuntu-22.04.5-desktop-amd64.iso"
         unmount          = true
     }
 
@@ -103,7 +103,7 @@ source "proxmox-iso" "ubuntu-server-focal"  {
 # this is where the machine image is build
 build {
     name    = "ubuntu2204desktop"  # name of the template that will be created in Proxmox
-    sources = ["source.proxmox-iso.ubuntu-server-focal"] 
+    sources = ["source.proxmox-iso.ubuntu-desktop-focal"] 
 
     # first shell script to be executed on the amchine
     provisioner "shell" {
