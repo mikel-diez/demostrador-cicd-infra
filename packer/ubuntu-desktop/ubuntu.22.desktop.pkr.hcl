@@ -73,11 +73,10 @@ source "proxmox-iso" "ubuntu-desktop-focal"  {
 
     boot_command = [
         "<esc><wait>",
-        "e<wait>",
-        "<down><down><down><end>",
-        "<bs><bs><bs><bs><wait>",
-        "only-ubiquity ds=nocloud-net\\;s=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ quiet splash ---<wait>",
-        "<f10><wait>"
+        "c<wait>",
+        "linux /casper/vmlinuz --- autoinstall ds='nocloud-net;s=http://{{ .HTTPIP }}:{{ .HTTPPort }}/'<enter><wait5s>",
+        "initrd /casper/initrd<enter><wait5s>",
+        "boot<enter><wait5s>"
     ]
 
     boot      = "c" # console mode for booting
