@@ -76,7 +76,7 @@ source "proxmox-iso" "ubuntu-desktop-focal"  {
         "e<wait>",
         "<down><down><down><end>",
         "<bs><bs><bs><bs><wait>",
-        "automatic-ubiquity ds=nocloud-net\\;s=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ quiet splash ---<wait>",
+        "only-ubiquity ds=nocloud-net\\;s=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ quiet splash ---<wait>",
         "<f10><wait>"
     ]
 
