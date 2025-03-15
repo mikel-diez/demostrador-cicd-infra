@@ -73,10 +73,11 @@ source "proxmox-iso" "ubuntu-desktop-focal"  {
 
     boot_command = [
         "<esc><wait>",
-        "c<wait>",
-        "linux /boot/vmlinuz --- autoinstall ds=nocloud-net\\;s=http://{{.HTTPIP}}:{{.HTTPPort}}/ quiet splash<enter><wait>",
-        "initrd /boot/initrd<enter><wait>",
-        "boot<enter>"
+        "e<wait>",
+        "<down><down><down><end>",
+        "<bs><bs><bs><bs><wait>",
+        "autoinstall ds=nocloud-net\\;s=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ quiet splash ---<wait>",
+        "<f10><wait>"
     ]
 
     boot      = "c" # console mode for booting
