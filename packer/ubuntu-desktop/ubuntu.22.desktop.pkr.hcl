@@ -24,7 +24,7 @@ source "proxmox-iso" "ubuntu-desktop-focal"  {
     insecure_skip_tls_verify = true 
 
     node                 = "pve-node-1"
-    vm_id                = 700
+    vm_id                = 800
     vm_name              = "ubuntu2204desktop"
     template_description = "Ubuntu desktop 22.04 template"
 
