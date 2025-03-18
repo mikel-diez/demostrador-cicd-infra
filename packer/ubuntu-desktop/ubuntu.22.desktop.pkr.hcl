@@ -32,7 +32,7 @@ source "proxmox-iso" "ubuntu-desktop-focal"  {
     # download the image from https://releases.ubuntu.com/jammy/ via UI 
     # then move it to a storage in Proxmox
     boot_iso {
-        iso_file = "local:iso/ubuntu-22.04-desktop-amd64.iso"
+        iso_file = "local:iso/ubuntu-24.04.1-desktop-amd64.iso"
         iso_storage_pool = "local"
         unmount = true
     }
