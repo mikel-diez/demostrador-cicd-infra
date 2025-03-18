@@ -69,17 +69,16 @@ source "proxmox-iso" "ubuntu-desktop-focal"  {
 
 
     boot_command = [
-        "<tab><wait>",
-        " auto-install/enable=true",
-        " debconf/priority=critical",
-        " preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg",
-        " locale=es_ES.UTF-8",
-        " console-setup/ask_detect=false",
-        " console-setup/layoutcode=us",
-        " -- <enter><wait>"
+        "<leftShift>",
+        "<esc><wait>",
+        "c<wait>",
+        "linux /casper/vmlinuz url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/setup.sh <enter><wait>",
+        "initrd /casper/initrd<enter><wait>",
+        "boot<enter><wait>"
     ]
 
-    boot_wait = "5s"
+
+    boot_wait = "10s"
 
 
 
