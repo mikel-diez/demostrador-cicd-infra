@@ -32,14 +32,12 @@ source "proxmox-iso" "ubuntu-desktop-focal"  {
     # download the image from https://releases.ubuntu.com/jammy/ via UI 
     # then move it to a storage in Proxmox
     boot_iso {
-        type             = "ide"
-        iso_file         = "local:iso/ubuntu-22.04.5-desktop-amd64.iso"
-        unmount          = true
+        iso_file = "local:iso/ubuntu-22.04-desktop-amd64.iso"
+        iso_storage_pool = "local"
+        unmount = true
     }
 
     # system settings
-    iso_storage_pool = "local"
-    unmount_iso = true
     qemu_agent = true  # lets prmoxmox agent to retrieve machine data to show in IU, as 'vmware tools' in Vmware
     scsi_controller = "virtio-scsi-pci" # default controller in most cases
 
@@ -48,7 +46,6 @@ source "proxmox-iso" "ubuntu-desktop-focal"  {
         disk_size = "20G"
         format = "raw"
         storage_pool = "local-lvm"
-        storage_pool_type = "lvm"
         type = "virtio"
     }
 
@@ -71,15 +68,18 @@ source "proxmox-iso" "ubuntu-desktop-focal"  {
     cloud_init_storage_pool = "local-lvm"
 
 
-boot_command = [
-        "<esc><wait>",
-        "e<wait>",
-        "<down><down><down><end>",
-        " autoinstall ds=nocloud-net;s=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ ",
-        "---<f10><wait>"
+    boot_command = [
+        "<tab><wait>",
+        " auto-install/enable=true",
+        " debconf/priority=critical",
+        " preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg",
+        " locale=es_ES.UTF-8",
+        " console-setup/ask_detect=false",
+        " console-setup/layoutcode=us",
+        " -- <enter><wait>"
     ]
 
-    boot_wait = "10s"
+    boot_wait = "5s"
 
 
 
