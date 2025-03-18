@@ -71,16 +71,15 @@ source "proxmox-iso" "ubuntu-desktop-focal"  {
     cloud_init_storage_pool = "local-lvm"
 
 
-    boot_command = [
+boot_command = [
         "<esc><wait>",
-        "c<wait>",
-        "linux /casper/vmlinuz --- ubiquity automatic-ubiquity noprompt noshell only-ubiquity quiet ds='nocloud-net;s=http://{{ .HTTPIP }}:{{ .HTTPPort }}/'<enter><wait5s>",
-        "initrd /casper/initrd<enter><wait5s>",
-        "boot<enter><wait5s>"
+        "e<wait>",
+        "<down><down><down><end>",
+        " autoinstall ds=nocloud-net;s=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ ",
+        "---<f10><wait>"
     ]
 
-    boot      = "c" # console mode for booting
-    boot_wait = "15s" # wait time
+    boot_wait = "10s"
 
 
 

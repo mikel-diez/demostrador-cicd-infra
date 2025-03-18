@@ -1,2 +1,2 @@
-instance-id: ubuntu2404
-local-hostname: ubuntu2404
+instance-id: ubuntu-desktop-inst
+local-hostname: ubuntu-desktop
