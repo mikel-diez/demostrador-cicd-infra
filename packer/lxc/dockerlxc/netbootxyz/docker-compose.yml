@@ -27,9 +27,8 @@ services:
     volumes:
       - ./dnsmasq.conf:/etc/dnsmasq.conf
     ports:
-      - 53:53/udp       # DNS
-      - 67:67/udp       # DHCP
-      - 8080:8080/tcp   # Web UI
+      - 69:69/udp      # TFTP only (no DHCP)
+      - 8080:8080/tcp  # Web UI
     restart: unless-stopped
     network_mode: host
     cap_add:

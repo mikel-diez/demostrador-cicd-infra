@@ -1,34 +1,24 @@
 #!/bin/bash
-#!/bin/bash
-# NetBoot.xyz Docker Setup Script
+# NetBoot.xyz Docker Setup Script (TFTP only, no DHCP)
 
 # Configuration variables - ADJUST THESE TO MATCH YOUR NETWORK
 DOCKER_DIR="/opt/netboot-xyz"
-DHCP_RANGE="192.168.1.100,192.168.1.200,255.255.255.0,12h"
-ROUTER_IP="192.168.1.1"
-DNS_SERVER="192.168.1.1"
-DOMAIN_NAME="local"
+LAN_SUBNET="192.168.1.0"  # Change to match your network
 
 # Create directory structure
 mkdir -p "$DOCKER_DIR/config/tftpboot"
 mkdir -p "$DOCKER_DIR/assets"
 
-# Create dnsmasq.conf
+# Create dnsmasq.conf for proxy DHCP mode
 cat > "$DOCKER_DIR/dnsmasq.conf" << EOF
-# DHCP server configuration
-dhcp-range=$DHCP_RANGE
-dhcp-option=option:router,$ROUTER_IP
-dhcp-option=option:dns-server,$DNS_SERVER
-dhcp-option=option:domain-name,$DOMAIN_NAME
-
-# PXE booting
-dhcp-boot=netboot.xyz.kpxe
+# Proxy DHCP mode (doesn't assign IPs)
+dhcp-range=$LAN_SUBNET,proxy
+pxe-service=x86PC,"Boot from network",netboot.xyz.kpxe
 enable-tftp
 tftp-root=/config/tftpboot
 
 # Log settings
 log-queries
-log-dhcp
 EOF
 
 # Download netboot files
