@@ -24,8 +24,7 @@ services:
     environment:
       - HTTP_USER=admin
       - HTTP_PASS=admin
-    volumes:
-      - ./dnsmasq.conf:/etc/dnsmasq.conf
+      - DNSMASQ_CONF=${PWD}/dnsmasq.conf
     ports:
       - 69:69/udp      # TFTP only (no DHCP)
       - 8080:8080/tcp  # Web UI
