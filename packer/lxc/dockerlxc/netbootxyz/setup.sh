@@ -2,8 +2,8 @@
 # NetBoot.xyz Docker Setup Script (TFTP only, no DHCP)
 
 # Configuration variables - ADJUST THESE TO MATCH YOUR NETWORK
-DOCKER_DIR="/opt/netboot-xyz"
-LAN_SUBNET="192.168.1.0"  # Change to match your network
+DOCKER_DIR="netboot-xyz"
+LAN_SUBNET="192.199.1.0"  # Change to match your network
 
 # Create directory structure
 mkdir -p "$DOCKER_DIR/config/tftpboot"
