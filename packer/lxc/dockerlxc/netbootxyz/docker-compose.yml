@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  netboot-xyz:
+    image: ghcr.io/netbootxyz/netbootxyz
+    container_name: netbootxyz
+    environment:
+      - MENU_VERSION=2.0.59
+      - PORT_RANGE=30000-32000
+      - DEFAULT_MENU_VERSION=2.0.59
+    volumes:
+      - ./config:/config
+      - ./assets:/assets
+    ports:
+      - 3000:3000/tcp  # Web interface
+      - 69:69/udp      # TFTP
+      - 80:80/tcp      # HTTP
+    restart: unless-stopped
+    network_mode: host
+    
+  dnsmasq:
+    image: jpillora/dnsmasq
+    container_name: dnsmasq
+    environment:
+      - HTTP_USER=admin
+      - HTTP_PASS=admin
+    volumes:
+      - ./dnsmasq.conf:/etc/dnsmasq.conf
+    ports:
+      - 53:53/udp       # DNS
+      - 67:67/udp       # DHCP
+      - 8080:8080/tcp   # Web UI
+    restart: unless-stopped
+    network_mode: host
+    cap_add:
+      - NET_ADMIN

@@ -29,9 +29,22 @@ autoinstall:
     - qemu-guest-agent
     - sudo
     - openssh-server
+    - ca-certificates
+    - curl
+    - gnupg
   late-commands:
     - echo 'PasswordAuthentication yes' >> /target/etc/ssh/sshd_config
     - systemctl enable ssh --now
+    # Add Docker's official GPG key and repository
+    - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /target/etc/apt/keyrings/docker.gpg
+    - echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" > /target/etc/apt/sources.list.d/docker.list
+    - mkdir -p /target/etc/apt/keyrings
+    # Install Docker and Docker Compose
+    - apt-get update
+    - apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+    # Add users to docker group
+    - usermod -aG docker telecomunicaciones
+    - usermod -aG docker provisioner
   storage:
     layout:
       name: direct
