@@ -1,5 +1,4 @@
 version: '3'
-
 services:
   netboot-xyz:
     image: ghcr.io/netbootxyz/netbootxyz
@@ -17,18 +16,3 @@ services:
       - 80:80/tcp      # HTTP
     restart: unless-stopped
     network_mode: host
-    
-  dnsmasq:
-    image: jpillora/dnsmasq
-    container_name: dnsmasq
-    environment:
-      - HTTP_USER=admin
-      - HTTP_PASS=admin
-      - DNSMASQ_CONF=${PWD}/dnsmasq.conf
-    ports:
-      - 69:69/udp      # TFTP only (no DHCP)
-      - 8080:8080/tcp  # Web UI
-    restart: unless-stopped
-    network_mode: host
-    cap_add:
-      - NET_ADMIN
