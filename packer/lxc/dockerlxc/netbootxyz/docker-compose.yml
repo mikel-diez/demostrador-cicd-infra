@@ -30,5 +30,5 @@ services:
       - ./dnsmasq.conf:/etc/dnsmasq.conf:ro
       - ./assets:/var/lib/tftpboot:ro
     environment:
-      - TFTP_SERVER_IP=${LAN_SUBNET%.*}.243
+      - TFTP_SERVER_IP=$${LAN_SUBNET%.*}.243
     restart: unless-stopped
