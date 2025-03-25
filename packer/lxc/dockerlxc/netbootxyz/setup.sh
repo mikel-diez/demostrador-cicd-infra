@@ -6,7 +6,7 @@ set -e  # Exit on error
 LAN_SUBNET="192.199.1.0"  # Change to match your network
 
 # Create directory structure in the current directory
-mkdir -p config/tftpboot
+mkdir -p config
 mkdir -p assets
 
 # Create dnsmasq.conf for proxy DHCP mode in the current directory
@@ -26,10 +26,10 @@ pxe-service=X86-64_EFI, "Boot UEFI iPXE", netboot.xyz.efi
 EOF
 
 # Download netboot files
-cd config/tftpboot
+cd assets
 wget https://boot.netboot.xyz/ipxe/netboot.xyz.efi
 wget https://boot.netboot.xyz/ipxe/netboot.xyz.kpxe
-cd ../..
+cd ..
 
 # Set proper permissions
 chmod -R 755 .
