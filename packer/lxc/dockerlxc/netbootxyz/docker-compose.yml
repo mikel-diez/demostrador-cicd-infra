@@ -17,7 +17,6 @@ services:
     ports:
       - 3000:3000
       - 69:69/udp
-      - 8080:80 #optional
     restart: unless-stopped
 
   dnsmasq:
