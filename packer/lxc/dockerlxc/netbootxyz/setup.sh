@@ -11,14 +11,21 @@ mkdir -p assets
 
 # Create dnsmasq.conf for proxy DHCP mode in the current directory
 cat > dnsmasq.conf << EOF
-# Proxy DHCP mode (doesn't assign IPs)
-dhcp-range=$LAN_SUBNET,proxy
-pxe-service=x86PC,"Boot from network",netboot.xyz.kpxe
+# dnsmasq configuration for netbootxyz
 enable-tftp
-tftp-root=/config/tftpboot
+tftp-root=/var/lib/tftpboot
 
-# Log settings
-log-queries
+# Architecture detection
+dhcp-vendorclass=BIOS,PXEClient:Arch:00000
+dhcp-vendorclass=UEFI32,PXEClient:Arch:00006
+dhcp-vendorclass=UEFI,PXeClient:Arch:00007
+dhcp-vendorclass=UEFI64,PXEClient:Arch:00009
+
+# Conditional boot files
+dhcp-boot=net:UEFI32,efi32/syslinux.efi,bootserver,\${TFTP_SERVER_IP}
+dhcp-boot=net:BIOS,bios/pxelinux.0,bootserver,\${TFTP_SERVER_IP}
+dhcp-boot=net:UEFI64,efi64/syslinux.efi,bootserver,\${TFTP_SERVER_IP}
+dhcp-boot=net:UEFI,efi64/syslinux.efi,bootserver,\${TFTP_SERVER_IP}
 EOF
 
 # Download netboot files to the current directory's config/tftpboot folder

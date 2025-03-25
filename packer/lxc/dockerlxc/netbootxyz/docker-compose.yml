@@ -19,3 +19,16 @@ services:
       - 69:69/udp
       - 8080:80 #optional
     restart: unless-stopped
+
+  dnsmasq:
+    image: jpillora/dnsmasq
+    container_name: dnsmasq
+    network_mode: host
+    cap_add:
+      - NET_ADMIN
+    volumes:
+      - ./dnsmasq.conf:/etc/dnsmasq.conf:ro
+      - ./assets:/var/lib/tftpboot:ro
+    environment:
+      - TFTP_SERVER_IP=${LAN_SUBNET%.*}.243
+    restart: unless-stopped
