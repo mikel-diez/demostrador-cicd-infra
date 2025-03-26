@@ -18,9 +18,19 @@ tftp-root=/var/lib/tftpboot
 # Proxy DHCP mode (doesn't assign IPs)
 dhcp-range=$LAN_SUBNET,proxy
 
-# Simple boot configuration
-dhcp-boot=netboot.xyz.efi
-pxe-service=X86PC, "Boot UEFI iPXE", netboot.xyz.efi
+# UEFI Boot configuration
+dhcp-match=set:efi-x86_64,option:client-arch,7
+dhcp-match=set:efi-x86_64,option:client-arch,9
+dhcp-match=set:efi-x86,option:client-arch,6
+dhcp-boot=tag:efi-x86_64,netboot.xyz.efi
+dhcp-boot=tag:efi-x86,netboot.xyz.efi
+
+# Legacy BIOS Boot configuration
+dhcp-match=set:bios,option:client-arch,0
+dhcp-boot=tag:bios,netboot.xyz.kpxe
+
+# PXE menu entries
+pxe-service=X86PC, "Boot BIOS PXE", netboot.xyz.kpxe
 pxe-service=BC_EFI, "Boot UEFI iPXE", netboot.xyz.efi
 pxe-service=X86-64_EFI, "Boot UEFI iPXE", netboot.xyz.efi
 EOF
