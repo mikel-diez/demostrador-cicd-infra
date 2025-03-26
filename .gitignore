@@ -275,13 +275,13 @@ terraform.rc
 # Custom rules (everything added below won't be overriden by 'Generate .gitignore File' if you use 'Update' option)
 
 # NetbootXYZ specific
-packer/lxc/dockerlxc/netbootxyz/assets/
-packer/lxc/dockerlxc/netbootxyz/config/
+packer/lxc/dockerlxc/netbootxyz/assets/*
+packer/lxc/dockerlxc/netbootxyz/config/*
 packer/lxc/dockerlxc/netbootxyz/dnsmasq.conf
 
 # NetbootXYZ boot files
-packer/lxc/dockerlxc/netbootxyz/**/*.efi
-packer/lxc/dockerlxc/netbootxyz/**/*.kpxe
+packer/lxc/dockerlxc/netbootxyz/**/*.efi*
+packer/lxc/dockerlxc/netbootxyz/**/*.kpxe*
 packer/lxc/dockerlxc/netbootxyz/**/*.0
 packer/lxc/dockerlxc/netbootxyz/**/*.com
 packer/lxc/dockerlxc/netbootxyz/**/netboot.xyz-*
