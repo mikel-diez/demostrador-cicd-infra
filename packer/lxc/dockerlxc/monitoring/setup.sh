@@ -3,10 +3,12 @@
 # Create directories if they don't exist
 mkdir -p grafana-data
 mkdir -p influxdb-data
+mkdir -p influxdb-config
 
 # Set permissions (use your actual user UID:GID instead of 1000:1000 if different)
 chown -R 1000:1000 grafana-data
 chown -R 1000:1000 influxdb-data
+chown -R 1000:1000 influxdb-config
 
 # Make the setup script executable
 chmod +x setup.sh
