@@ -15,13 +15,18 @@ services:
       - GF_SECURITY_ADMIN_USER=${GRAFANA_ADMIN_USER:-admin}
       - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_ADMIN_PASSWORD:-admin}
       - GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource,alexanderzobnin-zabbix-app
+      - GF_DATASOURCES_TIMEOUT=60
+      - GF_DATASOURCES_INFLUXDB_TIMEOUT=60
+      - GF_PROXIES_DEFAULT_TIMEOUT=60
+      - GF_DATAPROXY_TIMEOUT=60
+    depends_on:
+      - influxdb
   influxdb:
     image: influxdb:latest
     container_name: influxdb_container
     restart: always
     ports:
       - 8086:8086
-      - 8089:8089/udp
     networks:
       - monitoring_network
     volumes:
@@ -35,19 +40,19 @@ services:
       - DOCKER_INFLUXDB_INIT_BUCKET=${INFLUXDB_BUCKET:-proxmox}
       - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=${INFLUXDB_TOKEN:-my-super-secret-admin-token}
       - INFLUXD_HTTP_BIND_ADDRESS=:8086
+      - INFLUXDB_HTTP_READ_TIMEOUT=60s
+      - INFLUXDB_HTTP_WRITE_TIMEOUT=60s
   telegraf:
     image: telegraf:latest
     container_name: telegraf_container
     restart: always
+    ports:
+      - 8089:8089/udp
     networks:
       - monitoring_network
     volumes:
       - ./telegraf.conf:/etc/telegraf/telegraf.conf:ro
     environment:
-      - PROXMOX_HOST=${PROXMOX_HOST:-proxmox.local}
-      - PROXMOX_USER=${PROXMOX_USER:-root@pam}
-      - PROXMOX_TOKEN_ID=${PROXMOX_TOKEN_ID:-your_token_id}
-      - PROXMOX_TOKEN_SECRET=${PROXMOX_TOKEN_SECRET:-your_token_secret}
       - INFLUXDB_URL=${INFLUXDB_URL:-http://influxdb:8086}
       - INFLUXDB_TOKEN=${INFLUXDB_TOKEN:-my-super-secret-admin-token}
       - INFLUXDB_ORG=${INFLUXDB_ORG:-proxmox}
