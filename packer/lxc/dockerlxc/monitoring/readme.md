@@ -28,7 +28,7 @@ This Docker Compose setup provides a complete monitoring solution for Proxmox us
 ## Accessing the Services
 
 - **Grafana**: http://your-lxc-ip:3001 (default login: admin/admin)
-- **InfluxDB UI**: http://your-lxc-ip:8086 (default login: admin/adminadmin)
+- **InfluxDB UI**: http://your-lxc-ip:8086 (default login: admin/adminadmin12345)
 
 ## Important Notes
 
@@ -37,7 +37,7 @@ This Docker Compose setup provides a complete monitoring solution for Proxmox us
 2. When accessing InfluxDB for the first time:
    - The initial setup is handled automatically via environment variables
    - Use the credentials defined in your `.env` file
-   - Default: Username: admin, Password: adminadmin
+   - Default: Username: admin, Password: adminadmin12345
 
 3. The Telegraf agent is configured to:
    - Use the InfluxDB v2 API

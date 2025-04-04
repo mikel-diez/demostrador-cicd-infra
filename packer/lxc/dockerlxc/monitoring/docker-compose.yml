@@ -30,10 +30,11 @@ services:
     environment:
       - DOCKER_INFLUXDB_INIT_MODE=setup
       - DOCKER_INFLUXDB_INIT_USERNAME=${INFLUXDB_ADMIN_USER:-admin}
-      - DOCKER_INFLUXDB_INIT_PASSWORD=${INFLUXDB_ADMIN_PASSWORD:-adminadmin}
+      - DOCKER_INFLUXDB_INIT_PASSWORD=${INFLUXDB_ADMIN_PASSWORD:-adminadmin12345}
       - DOCKER_INFLUXDB_INIT_ORG=${INFLUXDB_ORG:-proxmox}
       - DOCKER_INFLUXDB_INIT_BUCKET=${INFLUXDB_BUCKET:-proxmox}
       - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=${INFLUXDB_TOKEN:-my-super-secret-admin-token}
+      - INFLUXD_HTTP_BIND_ADDRESS=:8086
   telegraf:
     image: telegraf:latest
     container_name: telegraf_container
